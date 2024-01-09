@@ -1,8 +1,0 @@
-[INFO|httpx._client.py:1027] 2024-01-10 12:33:39 AM > HTTP Request: POST https://api.notion.com/v1/search "HTTP/1.1 200 OK"
-[INFO|httpx._client.py:1027] 2024-01-10 12:35:45 AM > HTTP Request: POST https://api.notion.com/v1/search "HTTP/1.1 200 OK"
-[ERROR|C:\Users\miny\AppData\Roaming\FlowLauncher\Plugins\flow-launcher-notion-plugin\main.py.main.py:48] 2024-01-10 12:35:45 AM > 0
-[INFO|httpx._client.py:1027] 2024-01-10 12:35:50 AM > HTTP Request: POST https://api.notion.com/v1/search "HTTP/1.1 401 Unauthorized"
-[ERROR|C:\Users\miny\AppData\Roaming\FlowLauncher\Plugins\flow-launcher-notion-plugin\main.py.main.py:48] 2024-01-10 12:35:50 AM > API token is invalid.
-[INFO|httpx._client.py:1027] 2024-01-10 12:38:28 AM > HTTP Request: POST https://api.notion.com/v1/search "HTTP/1.1 200 OK"
-[INFO|httpx._client.py:1027] 2024-01-10 12:38:32 AM > HTTP Request: POST https://api.notion.com/v1/search "HTTP/1.1 200 OK"
-[INFO|httpx._client.py:1027] 2024-01-10 12:38:34 AM > HTTP Request: POST https://api.notion.com/v1/search "HTTP/1.1 200 OK"
