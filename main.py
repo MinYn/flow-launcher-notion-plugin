@@ -14,24 +14,30 @@ class NotionSearch(Flox):
                 subtitle="Please check your settings Api Secret.",
                 method=self.open_setting_dialog
             )
-        try:
-            data = self.notion.search(query)
-        except (ReadTimeout, ConnectionError, HTTPError):
-            self.add_item(
-                title=f"Could not connect to Notion!",
-                subtitle="Please check your network and try again.",
-            )
-            return
-        else:
-            for item in self.notion.search_response(data['results']):
+        if query:
+            try:
+                data = self.notion.search(query)
+            except (ReadTimeout, ConnectionError, HTTPError):
                 self.add_item(
-                    title=item['title'],
-                    subtitle="{} Last Edited Time".format(item['last_edited_time']),
-                    icon=item['icon'],
-                    context="ctxData",
-                    method=self.browser.open,
-                    parameters=["{}?deepLinkOpenNewTab=true".format(item['url'])],
+                    title=f"Could not connect to Notion!",
+                    subtitle="Please check your network and try again.",
                 )
+                return
+            else:
+                for item in self.notion.search_response(data['results']):
+                    self.add_item(
+                        title=item['title'],
+                        subtitle="{} Last Edited Time".format(item['last_edited_time']),
+                        icon=item['icon'],
+                        context="ctxData",
+                        method=self.browser.open,
+                        parameters=["{}?deepLinkOpenNewTab=true".format(item['url'])],
+                    )
+        else:
+            self.add_item(
+                title=f"Notion Search...",
+                subtitle="Query Page Name",
+            )
 
 if __name__ == "__main__":
     notion_search = NotionSearch()
