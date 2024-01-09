@@ -1,0 +1,5 @@
+.env
+icons/
+!!icons/notion-icon.png
+.log
+__pycache__

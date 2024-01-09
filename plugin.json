@@ -1,0 +1,15 @@
+{
+    "ID": "2f4e384e-76ce-45c3-aea2-b16f5e5c328d",
+    "Name": "Notion Search",
+    "Description": "Notion Search API V3",
+    "Author": "MinYn",
+    "Version": "0.0.1",
+    "Language": "python",
+    "Website": "https://github.com/MinYn",
+    "UrlDownload": "https://github.com/MinYn/",
+    "UrlSourceCode": "https://github.com/MinYn/",
+    "IcoPath": "icons\\notion-icon.png",
+    "Tested": false,
+    "LatestReleaseDate": "2023-03-13T00:37:27Z",
+    "DateAdded": "2022-10-08T16:26:57Z"
+}
