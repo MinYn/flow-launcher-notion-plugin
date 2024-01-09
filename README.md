@@ -62,5 +62,5 @@ If you are building a public integration, use the authorization instructions inc
 ### Usage Keyword
 
 ```
-nt {query}
+ns {query}
 ```
