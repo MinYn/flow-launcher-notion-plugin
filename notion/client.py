@@ -2,13 +2,13 @@ from notion_client import Client
 import requests
 import struct
 import os
-from dotenv import dotenv_values
 
-config = dotenv_values(".env")
 
 class Notion():
     _default_icon_path="icons\\notion-icon.png"
-    _client = Client(auth=config.get("API_KEY"))
+
+    def __init__(self, token):
+        self._client = Client(auth=token)
 
     def _decodeemoji(self, emoji):
         if emoji:

@@ -1,48 +1,38 @@
-import logging
+from flox import Flox
 
-logging.basicConfig(
-    format='[%(levelname)s|%(name)s.%(filename)s:%(lineno)s] %(asctime)s > %(message)s',
-    level=logging.INFO,
-    datefmt='%Y-%m-%d %I:%M:%S %p',
-    filename='flow-launcher-notion.log',
-)
+from notion.client import Notion
+from requests.exceptions import ReadTimeout, ConnectionError, HTTPError
 
-logger = logging.getLogger(__file__)
+class NotionSearch(Flox):
+    def query(self, query):
+        api_secret = self.settings.get("api_secret")
+        if api_secret:
+            self.notion = Notion(api_secret)
+        else:
+            self.add_item(
+                title=f"Could not connect to Notion!",
+                subtitle="Please check your settings Api Secret.",
+                method=self.open_setting_dialog
+            )
+        try:
+            data = self.notion.search(query)
+        except (ReadTimeout, ConnectionError, HTTPError):
+            self.add_item(
+                title=f"Could not connect to Notion!",
+                subtitle="Please check your network and try again.",
+            )
+            return
+        else:
+            for item in self.notion.search_response(data['results']):
+                self.add_item(
+                    title=item['title'],
+                    subtitle="{} Last Edited Time".format(item['last_edited_time']),
+                    icon=item['icon'],
+                    context="ctxData",
+                    method=self.browser.open,
+                    parameters=["{}?deepLinkOpenNewTab=true".format(item['url'])],
+                )
 
-try:
-    from pyflowlauncher import JsonRPCAction, Plugin, Result, Method
-    from pyflowlauncher.result import ResultResponse
-    from notion.client import Notion
-    import webbrowser
-
-    class Query(Method):
-
-        def __call__(self, query: str) -> ResultResponse:
-            notion = Notion()
-            data = notion.search(query)
-            for item in notion.search_response(data['results']):
-                self.add_result(Result(
-                    Title=item['title'],
-                    SubTitle="마지막 수정 일자: {}".format (item['last_edited_time']),
-                    ContextData="ctxData",
-                    IcoPath=item['icon'],
-                    JsonRPCAction=JsonRPCAction(
-                        method="take_action",
-                        parameters=["{}?deepLinkOpenNewTab=true".format(item['url'])],
-                        # dontHideAfterAction=True
-                    )
-                ))
-            return self.return_results()
-
-    def take_action(arg):
-        webbrowser.open(arg)
-
-
-    if __name__ == "__main__":
-        plugin = Plugin()
-        plugin.add_method(Query())
-        plugin.add_method(take_action)
-        plugin.run()
-
-except Exception as e:
-    logger.error(e)
+if __name__ == "__main__":
+    notion_search = NotionSearch()
+    notion_search.run()

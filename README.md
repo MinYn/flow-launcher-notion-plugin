@@ -29,11 +29,9 @@ Any value used to authenticate API requests should always be kept secret. Use en
 If you do accidentally expose it, remember to “refresh” your secret.
 ```
 
-## 3. Create .env File
-/.env file
-```
-API_KEY={Notion API Secret}
-```
+## 3. Api Secret Setting
+
+Settings - Plugin - Notion Search - API Secret
 
 ## 4. [Give your integration page permissions](https://developers.notion.com/docs/create-a-notion-integration#give-your-integration-page-permissions)
 
