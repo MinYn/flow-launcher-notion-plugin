@@ -1,6 +1,6 @@
 from flox import Flox
 
-from notion.client import Notion
+from .client import Notion
 from requests.exceptions import ReadTimeout, ConnectionError, HTTPError
 
 class NotionSearch(Flox):

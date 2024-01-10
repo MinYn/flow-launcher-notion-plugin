@@ -5,7 +5,10 @@ import os
 
 
 class Notion():
-    _default_icon_path="icons\\notion-icon.png"
+    plugin_path="plugin"
+    icon_path=os.path.join(plugin_path, "icons")
+    emoji_icon_path=os.path.join(plugin_path, "emojiicons")
+    _default_icon_path=os.path.join(icon_path, "notion-icon.png")
 
     def __init__(self, token):
         self._client = Client(auth=token)
@@ -42,13 +45,13 @@ class Notion():
             if count > 1:
                 emojicodepoints += "_"
             emojicodepoints += x
-        icon = f"emojiicons\\{emojicodepoints}.png"
+        icon = os.path.join(self.emoji_icon_path, f"{emojicodepoints}.png")
         return icon
 
     def external_icon_parse(self, data_icon):
         icon_url = data_icon['external']['url']
         filename = icon_url.split('/')[-1]
-        filepath = f"icons\\{filename}"
+        filepath = os.path.join(self.icon_path, filename)
         self.file_save(icon_url, filepath)
         icon = filepath
         return icon
@@ -56,7 +59,7 @@ class Notion():
     def file_icon_parse(self, data_icon):
         icon_url = data_icon['file']['url']
         filename = icon_url.split('/')[-1].split('?')[0]
-        filepath = f"icons\\{filename}"
+        filepath = os.path.join(self.icon_path, filename)
         self.file_save(icon_url, filepath)
         icon = filepath
         return icon
