@@ -40,5 +40,4 @@ class NotionSearch(Flox):
             )
 
 if __name__ == "__main__":
-    notion_search = NotionSearch()
-    notion_search.run()
+    NotionSearch()
