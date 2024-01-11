@@ -1,3 +1,4 @@
 notion-client
-flox-lib
+pyflowlauncher
 requests
+python-i18n[YAML]

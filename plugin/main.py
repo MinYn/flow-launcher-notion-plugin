@@ -1,43 +1,48 @@
-from flox import Flox
+import i18n
 
-from .client import Notion
+from pyflowlauncher import Plugin, Result, Method
+from pyflowlauncher.result import ResultResponse
+from pyflowlauncher import api as API
+
 from requests.exceptions import ReadTimeout, ConnectionError, HTTPError
 
-class NotionSearch(Flox):
-    def query(self, query):
-        api_secret = self.settings.get("api_secret")
-        if api_secret:
-            self.notion = Notion(api_secret)
-        else:
-            self.add_item(
-                title=f"Could not connect to Notion!",
-                subtitle="Please check your settings Api Secret.",
-                method=self.open_setting_dialog
-            )
-        if query:
-            try:
-                data = self.notion.search(query)
-            except (ReadTimeout, ConnectionError, HTTPError):
-                self.add_item(
-                    title=f"Could not connect to Notion!",
-                    subtitle="Please check your network and try again.",
-                )
-                return
-            else:
-                for item in self.notion.search_response(data['results']):
-                    self.add_item(
-                        title=item['title'],
-                        subtitle="{} Last Edited Time".format(item['last_edited_time']),
-                        icon=item['icon'],
-                        context="ctxData",
-                        method=self.browser_open,
-                        parameters=["{}?deepLinkOpenNewTab=true".format(item['url'])],
-                    )
-        else:
-            self.add_item(
-                title=f"Notion Search...",
-                subtitle="Query Page Name",
-            )
+from .client import Notion
 
-if __name__ == "__main__":
-    NotionSearch()
+class Query(Method):
+    def __init__(self, plugin: Plugin) -> None:
+        super().__init__()
+        self.plugin=plugin
+
+    def __call__(self, query: str) -> ResultResponse:
+        api_secret = self.plugin.settings.get("api_secret")
+        if api_secret:
+            notion = Notion(api_secret)
+            if query:
+                try:
+                    data = notion.search(query)
+                except (ReadTimeout, ConnectionError, HTTPError) as e:
+                    self.add_result(Result(
+                        Title=i18n.t("error"),
+                        SubTitle=i18n.t("error-network")
+                    ))
+                else:
+                    for item in notion.search_response(data['results']):
+                        self.add_result(Result(
+                            Title=item['title'],
+                            SubTitle=i18n.t("error-network", datetime=item['last_edited_time']),
+                            IcoPath=item['icon'],
+                            ContextData="ctxData",
+                            JsonRPCAction=API.open_url("{}?deepLinkOpenNewTab=true".format(item['url']))
+                        ))
+            else:
+                self.add_result(Result(
+                    Title=i18n.t("searching"),
+                    SubTitle=i18n.t("searching-subtitle")
+                ))
+        else:
+            self.add_result(Result(
+                Title=i18n.t("error"),
+                SubTitle=i18n.t("error-api-secret"),
+                JsonRPCAction=API.open_setting_dialog
+            ))
+        return self.return_results()

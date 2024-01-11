@@ -98,9 +98,3 @@ class Notion():
                 "last_edited_time": last_edited_time,
             })
         return result
-
-if __name__ == "__main__":
-    notion = Notion()
-    data = notion.search("면접")
-    for item in notion.search_response(data['results']):
-        print(item)
