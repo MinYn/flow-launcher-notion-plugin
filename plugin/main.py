@@ -30,7 +30,7 @@ class NotionSearch(Flox):
                         subtitle="{} Last Edited Time".format(item['last_edited_time']),
                         icon=item['icon'],
                         context="ctxData",
-                        method=self.browser.open,
+                        method=self.browser_open,
                         parameters=["{}?deepLinkOpenNewTab=true".format(item['url'])],
                     )
         else:
