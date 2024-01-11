@@ -1,4 +1,4 @@
-# <img src="icons/notion-icon.png" style="width:23px;"/> Notion Search Plugin for Flow Launcher
+# <img src="plugin/icons/notion-icon.png" style="width:23px;"/> Notion Search Plugin for Flow Launcher
 
 ## 1. [Create your integration in Notion](https://developers.notion.com/docs/create-a-notion-integration#getting-started)
 
