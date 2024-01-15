@@ -1,14 +1,14 @@
-from notion_client import Client
+from notion_client import AsyncClient, Client
 import requests
 import struct
 import os
 
 
 class Notion():
-    plugin_path="plugin"
-    icon_path=os.path.join(plugin_path, "icons")
-    emoji_icon_path=os.path.join(plugin_path, "emojiicons")
-    _default_icon_path=os.path.join(icon_path, "notion-icon.png")
+    plugin_path = "plugin"
+    icon_path = os.path.join(plugin_path, "icons")
+    emoji_icon_path = os.path.join(plugin_path, "emojiicons")
+    _default_icon_path = os.path.join(icon_path, "notion-icon.png")
 
     def __init__(self, token):
         self._client = Client(auth=token)
