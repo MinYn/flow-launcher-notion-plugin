@@ -1,0 +1,10 @@
+{
+  "en": {
+    "searching": "Notion Search...",
+    "searching-subtitle": "Notion Search",
+    "error": "Could not connect to Notion!",
+    "error-api-secret": "Please check your settings Api Secret.",
+    "error-network": "Please check your network and try again.",
+    "last-edited": "%{datetime} Last Edited"
+  }
+}

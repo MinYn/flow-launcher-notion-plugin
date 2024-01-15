@@ -3,3 +3,4 @@ plugin/icons/**
 !plugin/icons/notion-icon.png
 *.log
 __pycache__/
+.venv/

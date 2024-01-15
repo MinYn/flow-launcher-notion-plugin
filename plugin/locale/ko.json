@@ -1,0 +1,10 @@
+{
+  "ko": {
+    "searching": "노션 검색 중 ...",
+    "searching-subtitle": "노션에서 검색",
+    "error": "노션에 연결 할 수 없습니다.",
+    "error-api-secret": "설정의 API Secret을 확인해주세요.",
+    "error-network": "네트워크가 불안정 합니다. 다시 시도 해주세요.",
+    "last-edited": "%{datetime} 마지막 수정일"
+  }
+}
