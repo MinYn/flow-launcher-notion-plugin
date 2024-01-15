@@ -19,21 +19,7 @@ on:
           - ""
 
 jobs:
-  skip_check_job:
-    runs-on: ubuntu-latest
-    outputs:
-      plugins: ${{ steps.filter.outputs.plugins }}
-    steps:
-    - uses: actions/checkout@v2
-    - uses: dorny/paths-filter@v2
-      id: filter
-      with:
-        filters: |
-          plugins:
-            - 'plugins.json'
   test-run-plugin:
-    needs: skip_check_job
-    if: ${{ needs.skip_check_job.outputs.plugins == 'true' }}
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
