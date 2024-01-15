@@ -1,9 +1,9 @@
 name: Publish Release
 
 on:
+  pull_request:
   workflow_dispatch:
   push:
-    branches: [ master ]
     paths-ignore: 
       - .github/*
       - .vscode/*
@@ -38,6 +38,7 @@ jobs:
         if: success()
         uses: softprops/action-gh-release@v1
         with:
+          prerelease: true
           files: 'Flow.Launcher.Plugin.Notion.Search.zip'
           tag_name: "v${{steps.version.outputs.prop}}"
         env:
