@@ -1,4 +1,5 @@
 notion-client
 pyflowlauncher
 requests
+python-i18n
 python-i18n[YAML]
