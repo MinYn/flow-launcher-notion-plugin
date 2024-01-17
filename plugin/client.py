@@ -1,4 +1,4 @@
-from notion_client import AsyncClient, Client
+from notion_client import Client
 import requests
 import struct
 import os
