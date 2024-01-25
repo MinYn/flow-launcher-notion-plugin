@@ -8,6 +8,7 @@ sys.path.append(os.path.join(plugindir, "plugin"))
 
 import i18n
 import logging
+import locale
 
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
@@ -20,7 +21,11 @@ if __name__ == "__main__":
     i18n.set('filename_format', '{locale}.{format}')
     i18n.set('file_format', 'json')
     i18n.load_path.append(os.path.join(plugindir, 'plugin', 'locale'))
-    i18n.set('locale', 'en')
+    loc = locale.getdefaultlocale()[0]
+    if loc in i18n.get('available_locales'):
+        i18n.set('locale', loc)
+    else:
+        i18n.set('locale', 'en_US')
     i18n.set('enable_memoization', True)
     plugin.add_method(Query(plugin))
     plugin.run()

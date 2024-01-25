@@ -22,7 +22,7 @@ class Query(Method):
                 if query:
                     try:
                         data = notion.search(query)
-                    except (ReadTimeout, ConnectionError, HTTPError) as e:
+                    except (ReadTimeout, ConnectionError, HTTPError) as _:
                         self.add_result(Result(
                             Title=i18n.t("error"),
                             SubTitle=i18n.t("error-network")
@@ -35,7 +35,7 @@ class Query(Method):
                                 SubTitle=i18n.t("last-edited", datetime=last_edited_time),
                                 IcoPath=item['icon'],
                                 ContextData="ctxData",
-                                JsonRPCAction=API.open_url("{}?deepLinkOpenNewTab=true".format(item['url']))
+                                JsonRPCAction=API.open_url(f"{item['url']}?deepLinkOpenNewTab=true")
                             ))
                 else:
                     self.add_result(Result(
@@ -43,10 +43,11 @@ class Query(Method):
                         SubTitle=i18n.t("searching-subtitle")
                     ))
             else:
+                JsonRPCAction = API.open_url(self.plugin.manifest().get("Website"))
                 self.add_result(Result(
                     Title=i18n.t("error"),
                     SubTitle=i18n.t("error-api-secret"),
-                    JsonRPCAction=API.open_setting_dialog()
+                    JsonRPCAction=JsonRPCAction
                 ))
         except Exception as e:
             self._logger.error(e)
