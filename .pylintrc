@@ -73,6 +73,7 @@ fail-on=
 # a server-like mode.
 clear-cache-post-run=no
 
+source-roots=.,./plugin,./.venv
 
 [MESSAGES CONTROL]
 
