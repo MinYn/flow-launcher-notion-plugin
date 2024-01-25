@@ -1,5 +1,8 @@
 # <img src="plugin/icons/notion-icon.png" style="width:23px;"/> Notion Search Plugin for Flow Launcher
 
+[![GitHub Release](https://img.shields.io/github/v/release/MinYn/flow-launcher-notion-plugin?style=flat-square)](https://github.com/MinYn/flow-launcher-notion-plugin/releases)
+[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/MinYn/flow-launcher-notion-plugin/total?style=flat-square&label=Downloads)](https://github.com/MinYn/flow-launcher-notion-plugin/releases)
+
 ## 1. [Create your integration in Notion](https://developers.notion.com/docs/create-a-notion-integration#getting-started)
 
 The first step to building any integration (internal or public) is to create a new integration in Notion’s integrations dashboard: [https://www.notion.com/my-integrations](https://www.notion.com/my-integrations).
