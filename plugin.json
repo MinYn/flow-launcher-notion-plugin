@@ -4,7 +4,7 @@
     "Name": "Notion Search",
     "Description": "Notion Search API",
     "Author": "MinYn",
-    "Version": "1.0.3",
+    "Version": "1.0.4",
     "Language": "python",
     "Website": "https://github.com/MinYn/flow-launcher-notion-plugin",
     "UrlSourceCode": "https://github.com/MinYn/flow-launcher-notion-plugin/tree/master/",
